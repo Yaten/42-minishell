@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"ft_minishell.h": "c",
+		"ft_builtin.h": "c",
+		"ft_parse.h": "c",
+		"types.h": "c"
+	},
+	"cSpell.words": [
+		"slinkedlist",
+		"snode"
+	]
+}
