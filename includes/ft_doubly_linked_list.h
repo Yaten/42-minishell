@@ -15,14 +15,17 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include "ft_simple_linked_list.h"
 
 typedef struct	s_node
 {
 	int				fd_in;
 	int				fd_out;
+	int				is_builtin;
 	char			*relation;
 	char			*path;
 	char			**val;
+	t_slist			*list;
 	struct s_node	*prev;
 	struct s_node	*next;
 }t_node;

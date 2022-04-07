@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*   ft_dup_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrosendo <wrosendo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 09:53:01 by mamaro-d          #+#    #+#             */
-/*   Updated: 2022/04/04 17:50:28 by wrosendo         ###   ########.fr       */
+/*   Created: 2022/04/06 11:31:48 by wrosendo          #+#    #+#             */
+/*   Updated: 2022/04/06 11:34:46 by wrosendo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-void	ft_parse(char *line, char **envp)
+void	ft_dup_in(t_node *tmp, int *fd, int *fd_aux)
 {
-	int	index;
-
-	index = 0;
-	g_data.pipe_count = 0;
-	while(line[index] != '\0')
-	{
-		if (line[index] == '|')
-		{
-			line[index] = '\0';
-			ft_create_cmd(line);
-			line += index + 1;
-			index = 0;
-			g_data.pipe_count++;
-		}
-		index++;
-	}
-	if (!ft_create_cmd(line))
-		return ;
-	if (g_data.boll_paths)
-		ft_exececutor();
+	if (!ft_strncmp(tmp->relation, "<<", 1))
+		dup2(tmp->fd_in, STDIN_FILENO);
 	else
-		ft_putstr_fd("commando not found\n", 2);
-	(void)envp;
+		dup2(fd_aux[0], STDIN_FILENO);
+	(void)fd;
+	(void)tmp;
 }

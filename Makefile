@@ -16,7 +16,8 @@ SRCDIR_LINKEDLIST = ./sources/doubly_linked_list
 INCLUDE = ./includes
 REMOVE = rm -rf
 
-SRC_EXECUTOR += ft_pipe.c
+SRC_EXECUTOR += ft_executor.c ft_exec_sys.c ft_create_heredoc.c ft_dup_in.c
+SRC_EXECUTOR += ft_dup_out.c
 OBJEXECUTOR = $(SRC_EXECUTOR:.c=.o)
 OBJECTS_EXECUTOR = $(addprefix $(OBJDIR)/, $(OBJEXECUTOR))
 
@@ -42,12 +43,13 @@ SRC_LINKEDLIST += ft_list_add_last.c
 OBJLINKEDLIST = $(SRC_LINKEDLIST:.c=.o)
 OBJECTS_LINKEDLIST = $(addprefix $(OBJDIR)/, $(OBJLINKEDLIST))
 
-SRC_PARSE += ft_expand.c ft_parse.c ft_quoting.c
+SRC_PARSE += ft_expand.c ft_parse.c ft_quoting.c ft_create_pipe.c
 SRC_PARSE += ft_create_cmd.c ft_destroy_list.c ft_find_path.c ft_print.c
+SRC_PARSE += ft_create_redir_output.c ft_create_redir_input.c ft_create_append.c
 OBJPARSE = $(SRC_PARSE:.c=.o)
 OBJECTS_PARSE = $(addprefix $(OBJDIR)/, $(OBJPARSE))
 
-SRC_RUNTIME += ft_event_loop.c ft_prompt_concat.c ft_set_new_line.c
+SRC_RUNTIME += ft_event_loop.c ft_prompt_concat.c ft_set_new_line.c ft_signals.c
 OBJRUNTIME = $(SRC_RUNTIME:.c=.o)
 OBJECTS_RUNTIME = $(addprefix $(OBJDIR)/, $(OBJRUNTIME))
 
@@ -96,7 +98,7 @@ fclean: clean
 re: fclean all
 
 v: re
-	valgrind --show-leak-kinds=all --track-origins=yes --leak-check=full --suppressions=readline.supp $(NAME)
+	valgrind --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --leak-check=full --suppressions=readline.supp $(NAME)
 
 gdb: re
 	gdb $(NAME)

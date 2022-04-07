@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrosendo <wrosendo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: prafael- <prafael-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:21:32 by prafael-          #+#    #+#             */
-/*   Updated: 2022/03/27 19:38:18 by wrosendo         ###   ########.fr       */
+/*   Updated: 2022/04/04 11:17:30 by prafael-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,13 @@ void	ft_destroy_list();
 void	ft_expand(char *input_string, int bool_quotes);
 
 void	ft_quoting(t_prompt *prompt, char *input_string, int bool_quotes);
+
+int		ft_create_pipe(char *line);
+
+void	ft_create_redir_output(char *line);
+
+void	ft_create_redir_input(char *line);
+
+void	ft_create_append(char *line);
 
 #endif

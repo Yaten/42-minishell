@@ -21,13 +21,14 @@
 # include "ft_simple_linked_list.h"
 # include "../ft_printf/include/ft_printf.h"
 
-# include <stdio.h>
+# include <fcntl.h>
 # include <signal.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <sys/wait.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 
@@ -61,6 +62,7 @@ typedef struct s_shell
 	t_prompt	prompt;
 	t_hash		*array;
 	t_doubly	*cmd_table;
+	char		*here_doc;
 }t_shell;
 
 extern t_shell	g_data;
@@ -87,5 +89,8 @@ void	ft_prompt_concat(t_prompt *prompt);
  * @return int
  */
 int		ft_set_new_line(t_prompt *prompt);
+
+void	here_doc_signal(int sig);
+void	ft_init_signals(void);
 
 # endif
